@@ -19,6 +19,7 @@ function Get-RFUserMapping {
         # The failed flag only returns mappings with jobs that have failed.
         [switch]$failed
     )
+    Connect-RFSession
     $projectName = Get-FlyProjects -Top 999 | Select-Object -ExpandProperty data | Where-Object { $_.id -eq $projectId } | Select-Object -ExpandProperty name
     $script:mappings = Get-FlyAllProjectMappings $projectId
     switch ($failed) {

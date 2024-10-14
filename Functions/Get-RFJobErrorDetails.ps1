@@ -27,7 +27,6 @@ function Get-RFJobErrorDetails {
         [ValidateSet('exchange', 'onedrive', 'sharedoint', 'teams', 'teamchat', 'm365group')]
         $ProjectType
     )
-    Connect-RFSession
     $Uri = "/projects/$projectType/$projectId/mappings/$mappingId/errordetails"
     $result = Get-RFNextPage -URI $Uri
     $result.data

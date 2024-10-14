@@ -28,7 +28,6 @@ function Get-RFRecentJobComment {
         [ValidateSet('exchange', 'onedrive', 'sharedoint', 'teams', 'teamchat', 'm365group')]
         $ProjectType
     )
-    Connect-RFSession
     $Uri = "/projects/$projectType/$projectId/mappings/$mappingId/reportsummary"
     $result = Get-RFNextPage -URI $Uri
     $result.historicalJobs[0].comments.comment
