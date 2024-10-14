@@ -22,12 +22,12 @@ function Connect-RFSession {
             Write-Information 'Forcing a new connection to Fly API'
             if ($null -eq $script:RFConfig.Certificate) {
                 Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
-                Set-RFConfig
+                Set-RFConfig -UpdateTokenTime
                 Write-Information 'RF config set with new connection information'
             }
             else {
                 Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
-                Set-RFConfig
+                Set-RFConfig -UpdateTokenTime
             }
             Write-Information 'Connection updated'
             Write-Information 'RF config set with new connection information'
@@ -43,11 +43,11 @@ function Connect-RFSession {
                         return
                     }
                     Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
-                    Set-RFConfig
+                    Set-RFConfig -UpdateTokenTime
                 }
                 else {
                     Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
-                    Set-RFConfig
+                    Set-RFConfig -UpdateTokenTime
                 }
                 Write-Information 'Connection updated'
                 Write-Information 'RF config set with new connection information'
