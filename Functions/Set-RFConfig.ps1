@@ -18,7 +18,13 @@ function Set-RFConfig {
         # Store the ClientSecret in the module variable for Connect-RFSession reconnections to the Fly API
         $ClientSecret
     )
-    (Get-FlyConfiguration).getenumerator().ForEach({
+    $flyConfig = Get-FlyConfiguration
+    # At the time of writing this function, the fly accesstoken expiration date fixed at 12:02:52 AM. Adding $timetoken to RFConfig to check if the accesstoken is still valid.
+    $tokenTime = get-date
+    if ($flyConfig.accesstoken -ne $script:RFConfig.AccessToken) {
+        $script:RFConfig['TokenTime'] = $tokenTime
+    }
+    $flyConfig.getenumerator().ForEach({
             $script:RFConfig[$_.Name] = $_.Value
         })
     if ($ClientSecret) {
