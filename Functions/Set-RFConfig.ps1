@@ -19,12 +19,12 @@ function Set-RFConfig {
         $ClientSecret,
         # Update the TokenTime in the module variable to check if the accesstoken is still valid
         [Parameter(Mandatory = $false)]
-        [switch]$updateTokenTime
+        [switch]$UpdateTokenTime
     )
     $flyConfig = Get-FlyConfiguration
     Write-Information "Fly configuration imported"
     # At the time of writing this function, the fly accesstoken expiration date fixed at 12:02:52 AM. Adding $timetoken to RFConfig to check if the accesstoken is still valid.
-    switch ($updateTokenTime) {
+    switch ($UpdateTokenTime) {
         true {
             $tokenTime = get-date
             $script:RFConfig['TokenTime'] = $tokenTime
