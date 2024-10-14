@@ -19,15 +19,19 @@ function Set-RFConfig {
         $ClientSecret
     )
     $flyConfig = Get-FlyConfiguration
+    Write-Information "Fly configuration imported"
     # At the time of writing this function, the fly accesstoken expiration date fixed at 12:02:52 AM. Adding $timetoken to RFConfig to check if the accesstoken is still valid.
     $tokenTime = get-date
     if ($flyConfig.accesstoken -ne $script:RFConfig.AccessToken) {
         $script:RFConfig['TokenTime'] = $tokenTime
+        write-information "TokenTime updated to $tokenTime"
     }
+    write-information "Updating RF configuration with Fly configuration information"
     $flyConfig.getenumerator().ForEach({
             $script:RFConfig[$_.Name] = $_.Value
         })
     if ($ClientSecret) {
         $script:RFConfig.ClientSecret = $ClientSecret
+        Write-Information "ClientSecret updated in RFConfig"
     }
 }
