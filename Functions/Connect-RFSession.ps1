@@ -19,11 +19,11 @@ function Connect-RFSession {
     switch ($Force) {
         true {
             if ($null -eq $script:RFConfig.Certificate) {
-                Connect-Fly -Url $script:RFConfig.Url -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
+                Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
                 Set-RFConfig
             }
             else {
-                Connect-Fly -Url $script:RFConfig.Url -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
+                Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
                 Set-RFConfig
             }
         }
@@ -36,11 +36,11 @@ function Connect-RFSession {
                         Write-Host 'Client Secret is not set. Please set the Client Secret using Set-RFConfig'
                         return
                     }
-                    Connect-Fly -Url $script:RFConfig.Url -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
+                    Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -ClientSecret $script:RFConfig.ClientSecret
                     Set-RFConfig
                 }
                 else {
-                    Connect-Fly -Url $script:RFConfig.Url -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
+                    Connect-Fly -Url $script:RFConfig.BaseUrl -ClientId $script:RFConfig.ClientId -Certificate $script:RFConfig.Certificate
                     Set-RFConfig
                 }
             }
