@@ -28,8 +28,7 @@ function Connect-RFSession {
             }
         }
         false {
-            $tokenInfo = Convert-JWTtoken $script:rfconfig.accesstoken
-            $timeCheck = [System.TimeOnly]$(Get-Date $tokenInfo.exp -Format hh:mm:ss) - [System.TimeOnly]$(Get-Date -Format hh:mm:ss)
+            $timeCheck = $(Get-Date $script:RFConfig.tokentime) - $(Get-Date)
             if ($timeCheck.TotalMinutes -lt 15) {
                 if ($null -eq $script:RFConfig.Certificate) {
                     if ($null -eq $script:RFConfig.ClientSecret) {
