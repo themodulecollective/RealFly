@@ -37,32 +37,31 @@ function Get-RFUserMapping {
     switch ($IncludeAllFields) {
         true {
             $mappings | Select-Object @{n = 'ProjectName'; e = { $projectName } },
+            @{n = 'Color'; e = { [ColorCode].GetEnumName($_.ColorCode) } },
+            @{n = 'ProjectType'; e = { [PlatformType].GetEnumName($_.sourcePlatform) } },
             @{n = 'Source'; e = { $_.sourceIdentity } },
             @{n = 'Destination'; e = { $_.destinationIdentity } },
-            @{n = 'ProjectType'; e = { [PlatformType].GetEnumName($_.sourcePlatform) } },
-            @{n = 'LastJobStatus'; e = { [ProjectMappingItemStageStatus].GetEnumName($_.lastMigrationStatus) } },
-            @{n = 'CurrentJobStage'; e = { [ProjectMappingItemStage].GetEnumName($_.stage) } },
             @{n = 'CurrentJobStatus'; e = { [ProjectMappingItemStageStatus].GetEnumName($_.stageStatus) } },
+            @{n = 'CurrentJobStage'; e = { [ProjectMappingItemStage].GetEnumName($_.stage) } },
+            @{n = 'LastJobStatus'; e = { [ProjectMappingItemStageStatus].GetEnumName($_.lastMigrationStatus) } },
             @{n = 'FailComment'; e = { if ($_.stageStatus -eq 6) { Get-RFRecentJobComment -projectid $_.projectid -mappingid $_.id -projecttype $([PlatformType].GetEnumName($_.sourcePlatform)).ToLower() } } },
-            @{n = 'Color'; e = { [ColorCode].GetEnumName($_.ColorCode) } },
             @{n = 'MappingId'; e = { $_.id } },
-            @{n = 'ProjectId'; e = { $projectId } },
             *
         }
         false {
             $mappings.ForEach({
                     [PSCustomObject]@{
                         ProjectName      = $projectName
+                        ProjectType      = [PlatformType].GetEnumName($_.sourcePlatform)
+                        Color            = [ColorCode].GetEnumName($_.ColorCode)
                         Source           = $_.sourceIdentity
                         Destination      = $_.destinationIdentity
-                        ProjectType      = [PlatformType].GetEnumName($_.sourcePlatform)
-                        LastJobStatus    = [ProjectMappingItemStageStatus].GetEnumName($_.lastMigrationStatus)
-                        CurrentJobStage  = [ProjectMappingItemStage].GetEnumName($_.stage)
                         CurrentJobStatus = [ProjectMappingItemStageStatus].GetEnumName($_.stageStatus)
+                        CurrentJobStage  = [ProjectMappingItemStage].GetEnumName($_.stage)
+                        LastJobStatus    = [ProjectMappingItemStageStatus].GetEnumName($_.lastMigrationStatus)
                         FailComment      = if ($_.stageStatus -eq 6) {
                             Get-RFRecentJobComment -projectid $_.projectid -mappingid $_.id -projecttype $([PlatformType].GetEnumName($_.sourcePlatform)).ToLower()
                         }
-                        Color            = [ColorCode].GetEnumName($_.ColorCode)
                         JobProgress      = $_.jobProgress
                         MappingId        = $_.id
                         ProjectId        = $projectId
