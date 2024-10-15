@@ -16,11 +16,11 @@ function Get-RFUserMapping {
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('id')]
         [string]
-        $projectId,
+        $ProjectId,
         # The failed flag only returns mappings with jobs that have failed.
         [Parameter(Mandatory = $false)]
         [switch]
-        $failed,
+        $Failed,
         # The IncludeAllFields flag returns all fields including non-human-readable fields.
         [Parameter(Mandatory = $false)]
         [switch]
