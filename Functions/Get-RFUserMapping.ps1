@@ -13,7 +13,8 @@ function Get-RFUserMapping {
     [CmdletBinding()]
     param (
         # The project id.
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [Alias('id')]
         [string]
         $projectId,
         # The failed flag only returns mappings with jobs that have failed.
