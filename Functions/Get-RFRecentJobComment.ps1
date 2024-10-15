@@ -13,21 +13,22 @@ function Get-RFRecentJobComment {
     [CmdletBinding()]
     param (
         # The Fly project ID
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [string]
         $ProjectId,
 
         # The migration job mapping ID
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [string]
         $MappingId,
 
         # The project type
-        [Parameter(Mandatory = $true)]
-        [string]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [ValidateSet('exchange', 'onedrive', 'sharedoint', 'teams', 'teamchat', 'm365group')]
+        [string]
         $ProjectType
     )
+    $ProjectType = $ProjectType.ToLower()
     $Uri = "/projects/$projectType/$projectId/mappings/$mappingId/reportsummary"
     $result = Get-RFNextPage -URI $Uri
     $result.historicalJobs[0].comments.comment
