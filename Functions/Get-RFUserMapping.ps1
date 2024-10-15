@@ -44,6 +44,7 @@ function Get-RFUserMapping {
             @{n = 'CurrentJobStatus'; e = { [ProjectMappingItemStageStatus].GetEnumName($_.stageStatus) } },
             @{n = 'FailComment'; e = { if ($_.stageStatus -eq 6) { Get-RFRecentJobComment -projectid $_.projectid -mappingid $_.id -projecttype $([PlatformType].GetEnumName($_.sourcePlatform)).ToLower() } } },
             @{n = 'Color'; e = { [ColorCode].GetEnumName($_.ColorCode) } },
+            @{n = 'MappingId'; e = { $_.id } },
             *
         }
         false {
@@ -61,7 +62,7 @@ function Get-RFUserMapping {
                         }
                         Color            = [ColorCode].GetEnumName($_.ColorCode)
                         JobProgress      = $_.jobProgress
-                        ID               = $_.id
+                        MappingId        = $_.id
                     }
                 })
         }
