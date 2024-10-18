@@ -38,8 +38,22 @@ Function Get-RFNextPage {
         Method  = 'GET'
         Headers = $authHeader
     }
-    $Result = Invoke-RestMethod @Account_params
-    $Result.data
+    try {
+        $Result = Invoke-RestMethod @Account_params
+        $Result.data
+    }
+    catch {
+        if ($_.exception.response.statuscode -eq 'TooManyRequests') {
+            Write-Information "Rate limit exceeded, waiting 62 seconds before retrying"
+            Start-Sleep -Seconds 62
+            $Result = Invoke-RestMethod @Account_params
+            $Result.data
+        }
+        else {
+            $_
+        }
+    }
+
     if ($result.data.nextlink) {
         Get-RFNextPage -Uri $result.data.nextlink -Nextlink
     }
