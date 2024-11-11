@@ -23,7 +23,7 @@ function Get-RFJobErrorDetails {
 
         # The project type
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-        [ValidateSet('exchange', 'onedrive', 'sharedoint', 'teams', 'teamchat', 'm365group')]
+        [ValidateSet('exchange', 'onedrive', 'sharepoint', 'teams', 'teamchat', 'm365group')]
         [string]
         $ProjectType
     )
