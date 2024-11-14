@@ -19,6 +19,7 @@ $Script:ModuleFiles = @(
     $(Join-Path -Path $Functions -ChildPath 'Get-RFUserMapping.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Set-RFColorCode.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Set-RFConfig.ps1')
+    $(Join-Path -Path $Functions -ChildPath 'Start-RFMigration.ps1')
 )
 
 foreach ($f in $ModuleFiles) {
@@ -34,3 +35,4 @@ $modelsRootPath = $(get-module fly.Client).path.split('Fly.Client.psm1') -join "
 . $modelsRootPath\ProjectMappingItemStage.ps1
 . $modelsRootPath\ProjectMappingItemStageStatus.ps1
 . $modelsRootPath\ColorCode.ps1
+. $modelsRootPath\MappingJobType.ps1
