@@ -1,3 +1,11 @@
+<#
+.SYNOPSIS
+    Start a migration job for a project mapping.
+.DESCRIPTION
+    Start a migration job for a project mapping.
+.EXAMPLE
+    Start-RFMigration -ProjectId 6edd0465-fnb2-4298-a8a3-0523a6016aa6 -MappingId 12c0bf1a-5172-461a-9d98-3a209404c6d9 -ProjectType teams -MigrationType incrementalmigration
+#>
 function Start-RFMigration {
     [CmdletBinding()]
     param (
@@ -16,7 +24,7 @@ function Start-RFMigration {
         [string]
         $ProjectType,
 
-        # The color to set
+        # Set the migration type
         [Parameter(Mandatory)]
         [ValidateSet('validation', 'emailforwarding', 'fullmigration', 'incrementalmigration', 'erroronly', 'permissiononly', 'membershiponly', 'assessment', 'generatereport', 'generateerrorreport', 'keepx500emailaddress', 'migratemailboxaliases', 'completemigration')]
         [string]
