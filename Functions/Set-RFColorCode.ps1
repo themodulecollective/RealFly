@@ -16,6 +16,7 @@ function Set-RFColorCode {
 
         # The migration job mapping ID
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [string[]]
         $MappingId,
 
         # The project type
