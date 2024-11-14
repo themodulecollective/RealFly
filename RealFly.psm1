@@ -17,6 +17,7 @@ $Script:ModuleFiles = @(
     $(Join-Path -Path $Functions -ChildPath 'Get-RFNextPage.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Connect-RFSession.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Get-RFUserMapping.ps1')
+    $(Join-Path -Path $Functions -ChildPath 'Set-RFColorCode.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Set-RFConfig.ps1')
 )
 

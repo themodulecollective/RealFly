@@ -83,6 +83,7 @@
         'Get-RFUserMapping'
         'Get-RFNextPage'
         'Get-RFUserMapping'
+        'Set-RFColorCode'
         'Set-RFConfig'
     )
 
