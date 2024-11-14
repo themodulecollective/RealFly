@@ -16,6 +16,7 @@ function Start-RFMigration {
 
         # The migration job mapping ID
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [string[]]
         $MappingId,
 
         # The project type
