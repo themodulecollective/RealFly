@@ -20,6 +20,7 @@ $Script:ModuleFiles = @(
     $(Join-Path -Path $Functions -ChildPath 'Set-RFColorCode.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Set-RFConfig.ps1')
     $(Join-Path -Path $Functions -ChildPath 'Start-RFMigration.ps1')
+    $(Join-Path -Path $Functions -ChildPath 'Stop-RFMigration.ps1')
 )
 
 foreach ($f in $ModuleFiles) {
