@@ -31,14 +31,14 @@ function Start-RFMigration {
         [string]
         $MigrationType,
 
-        # Schedule the migration time to start
+        # Schedule the migration time to start. Fly will use UTC for the time.
         [Parameter(Mandatory = $false)]
         [datetime]
-        $ScheduledTime
+        $ScheduledTimeUTC
     )
     $type = [int][MappingJobType ]::$MigrationType
     if ($ScheduledTime) {
-        $ScheduledTime = (get-date $scheduledtime).ticks
+        [string]$ScheduledTime = (get-date $scheduledtime).ticks
     }
     else {
         $ScheduledTime = 0
