@@ -29,10 +29,20 @@ function Start-RFMigration {
         [Parameter(Mandatory)]
         [ValidateSet('validation', 'emailforwarding', 'fullmigration', 'incrementalmigration', 'erroronly', 'permissiononly', 'membershiponly', 'assessment', 'generatereport', 'generateerrorreport', 'keepx500emailaddress', 'migratemailboxaliases', 'completemigration')]
         [string]
-        $MigrationType
+        $MigrationType,
+
+        # Schedule the migration time to start
+        [Parameter(Mandatory = $false)]
+        [datetime]
+        $ScheduledTime
     )
     $type = [int][MappingJobType ]::$MigrationType
-
+    if ($ScheduledTime) {
+        $ScheduledTime = (get-date $scheduledtime).ticks
+    }
+    else {
+        $ScheduledTime = 0
+    }
     $ProjectType = $ProjectType.ToLower()
     $URI = "/projects/$projectType/$projectId/migrations"
     $fullURI = $script:RFConfig.BaseURL + $URI
@@ -41,7 +51,7 @@ function Start-RFMigration {
     }
     $body = [pscustomobject]@{
         'type'          = $type
-        'scheduledTime' = 0
+        'scheduledTime' = $ScheduledTime
         # 'search' = ''
         # 'stageStatuses' = @()
         # 'statuses'= @()
